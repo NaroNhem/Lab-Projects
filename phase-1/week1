@@ -7,4 +7,28 @@ USB Flash drive
 
 SOFTWARE
 Ubuntu Server Version - Ubuntu 24.04.3 LTS (https://ubuntu.com/download/server#how-to-install-lts)
-Rufus(To create a bootabe flash drive) - https://rufus.ie/en/
+Rufus-ver.4.10(To create a bootabe flash drive) - https://rufus.ie/en/
+
+
+STEPS
+1. Download the iso of Ubuntu Live server
+2. Download rufus
+3. Plug in USB
+4. Run rufus
+  a. Setup should look like this:
+    DEVICE
+    (pick your USB drive)
+    BOOT SELECTION
+    (click SELECT, then pick the ISO you just downloaded)
+    PARTITION SCHEME
+    (MBR)
+    TARGET SYSTEM
+    (autofills based on selection above)
+    FILESYSTEM
+    (FAT32)
+    CLUSTERSIZE
+    (defualt)
+    click START(Process should take around 5min)
+
+    
+  
