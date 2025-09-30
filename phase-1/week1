@@ -9,6 +9,7 @@ SOFTWARE
 Ubuntu Server Version - Ubuntu 24.04.3 LTS (https://ubuntu.com/download/server#how-to-install-lts)
 Rufus-ver.4.10(To create a bootabe flash drive) - https://rufus.ie/en/
 
+**WARNING: THE PROCESSES TAKEN HERE WILL WIPE YOUR DEVICE. THIS IS INTENTIONAL TO INSTALL UBUNTU AND TURN THE LAPTOP INTO A SERVER.**
 
 STEPS
 1. Download the iso of Ubuntu Live server
@@ -29,6 +30,12 @@ STEPS
     CLUSTERSIZE
     (defualt)
     click START(Process should take around 5min)
+  b. After set, you can safely eject the USB
+5. Reboot your system and enter bootmode
+  a. The button to press will depend on your model. For the lenovo, its f12.
+6. Boot into the USB
+7. Start install process of Ubuntu Server
+  a. Use entire disk
 
     
   
