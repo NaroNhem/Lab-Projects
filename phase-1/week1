@@ -35,7 +35,22 @@ STEPS
   a. The button to press will depend on your model. For the lenovo, its f12.
 6. Boot into the USB
 7. Start install process of Ubuntu Server
-  a. Use entire disk
+  a. Select Language
+  b. Select network connection
+  c. Skip config proxy
+  d. If online: use the default mirror (archive.ubuntu.com).
+    -- If you get an error → choose “Continue without a mirror.”
+  e.Storage Setup
+    For simple setup → select Use an entire disk
+    Select your laptop’s disk (e.g., /dev/sda)
+    Confirm “Erase and Install”
+  f. Profile Setup
+  g. Choose Install OpenSSH server
+  h. Skip server snaps for now
+  I. Install and Reboot
+  j. After reboot run [sudo apt update && sudo apt upgrade -y]
+
+ 
 
     
   
