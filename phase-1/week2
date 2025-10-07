@@ -1,1 +1,45 @@
+SETTING IP KEY-BASED SSH LOGIN
+
+1. On your work station open powershell.
+  enter the following command: ssh-keygen -t ed25519 -C "user@labname"
+  *replace string inside quotes with your server name. Keep the quotations.*
+  a.Save to default path
+  b.Setting passphrase is optional
+  c.This creates a public key
+
+2.Display the public key using the following command: type $env:USERPROFILE\.ssh\id_ed25519.pub
+  a. Keep this available as we will need this to copy over into the server terminal.
+
+3.Add the key to your server(If not setup, I will provide a guide below these steps)
+  a. In powershell, open a new tab for your server terminal.
+  b. SSH into your terminal server using the following command: ssh user@serverip
+  c. In the terminal copy these commands:
+    mkdir -p ~/.ssh
+    chmod 700 ~/.ssh
+  d. Copy the public key in your home server tab into this text file. 
+    nano ~/.ssh/authorized_keys
+  e. Set proper permissions: chmod 600 ~/.ssh/authorized_keys
+  f. exit
+
+4. Test Key-Based Login
+  a. Back in power shell copy command:ssh -i $env:USERPROFILE\.ssh\id_ed25519 user@serverip
+  b. You should now be able to login without a password.
+
+SETTING UP SSH ON SERVER TERMINAL
+1. Update server: sudo apt update && sudo apt upgrade -y
+2. Install OpenSSH: sudo apt install openssh-server -y
+  a. Verify Installtion: ssh -V
+  b. Should see something like this: OpenSSH_9.6p1 Ubuntu-3ubuntu13
+3. Enable SSH: sudo systemctl enable ssh
+4. Start SSH service: sudo systemctl start ssh
+5. To check status: sudo systemctl status ssh
+
+
+
+
+
+
+
+
+
 
