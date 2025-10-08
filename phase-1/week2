@@ -1,3 +1,5 @@
+WEEK 2 SSH AND SECURITY
+
 SETTING IP KEY-BASED SSH LOGIN
 
 1. On your work station open powershell.
@@ -33,6 +35,20 @@ SETTING UP SSH ON SERVER TERMINAL
 3. Enable SSH: sudo systemctl enable ssh
 4. Start SSH service: sudo systemctl start ssh
 5. To check status: sudo systemctl status ssh
+
+
+ADDING SECURITY - FIREWALL SETUP
+We will not setup a firewall to only allow SSH while blocking everything else.
+1. Install the ufw: sudo apt install ufw -y
+2. Create rule to allow SSH: sudo ufw allow OpenSSH
+3. Enable the ufw: sudo ufw enable
+4. View status of ufw: sudo ufw status verbose
+  a. should see something like this:
+  To                         Action      From
+  --                         ------      ----
+  22/tcp (OpenSSH)           ALLOW IN    Anywhere
+  22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
+
 
 
 
