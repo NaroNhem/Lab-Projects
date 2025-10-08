@@ -38,7 +38,7 @@ SETTING UP SSH ON SERVER TERMINAL
 
 
 ADDING SECURITY - FIREWALL SETUP
-We will not setup a firewall to only allow SSH while blocking everything else.
+We will now setup a firewall to only allow SSH while blocking everything else.
 1. Install the ufw: sudo apt install ufw -y
 2. Create rule to allow SSH: sudo ufw allow OpenSSH
 3. Enable the ufw: sudo ufw enable
