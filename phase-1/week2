@@ -49,6 +49,57 @@ We will now setup a firewall to only allow SSH while blocking everything else.
   22/tcp (OpenSSH)           ALLOW IN    Anywhere
   22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
 
+ADDING FAIL2BAN
+Fail2Ban is a security tool that helps protect servers from brute-force attacks by monitoring authentication logs and automatically banning IPs that show suspicious behavior (like repeated failed login attempts).  
+It works alongside your SSH configuration and firewall (UFW) to add automated intrusion prevention.
+1. Update the server and install:
+  a. sudo apt update
+  b. sudo apt install fail2ban -y
+  c. sudo systemctl enable --now fail2ban
+2. Check status: 
+  a. sudo systemctl status fail2ban
+3. Create a local config file:
+  a. sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+  b. sudo nano /etc/fail2ban/jail.local
+4. Adding key configurations to our file. (Feel free to configure this to your needs)
+
+      [DEFAULT]
+      bantime  = 1h
+      findtime = 10m
+      maxretry = 3
+      dbfile = /var/lib/fail2ban/fail2ban.sqlite3
+
+    a. bantime: How long (in seconds, minutes, or hours) an IP stays banned. Here it’s 1 hour.
+    b. findtime: The time window to count failed login attempts.
+    c. maxretry: Number of failed login attempts allowed before banning.
+    d. dbfile: Path to the SQLite database that stores bans persistently — useful after restarts.
+
+5. Adding SSH configurations
+
+    [sshd]
+    enabled = true
+    port = ssh
+    logpath = /var/log/auth.log
+    backend = systemd
+
+  a. enabled: Turns this protection on.
+  b. port: Which port to monitor — set to “ssh” or your custom SSH port.
+  c. logpath: Path to your authentication logs.
+  d. backend: Defines how Fail2Ban reads logs; “systemd” works best for modern Ubuntu.
+
+6. Restart service to load config
+  a. sudo systemctl restart fail2ban
+
+7. Check active jails
+  a. sudo fail2ban-client status
+
+8. Check SSH jail details
+  a. sudo fail2ban-client status sshd
+
+
+
+
+
 
 
 
