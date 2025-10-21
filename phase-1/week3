@@ -1,0 +1,32 @@
+WEEK 3: ACTIVE DIRECTORY AND DOMAIN INTEGRATION
+
+We will be adding a windows domain and adding our server to it. This will help us practice central identity management, user permissions, and hybrid administration (Windows + Linux).
+
+SETTING UP WINDOWS SERVER VM
+1. Get the ISO and Create the VM 
+  a. Get a copy of windows 2022 iso from: https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022
+  b. Download virtualbox hypervisor
+  c. Once vbox(virtual box) is installed, click new to create a VM
+    - ISO should be the windows server we just installed. 
+    - For the guest page, update credentials and hit next
+    - Virtual hard ware should have: 4GB ram, 2 core CPU, min. 40GB of space
+
+2. INSTALL THE WINDOWS SERVER
+  a. Boot the VM 
+  **CAUTION** WHEN STARTING THE VM YOU MAY GET A "windows cannot find the microsoft software license terms.." ERROR. GO TO > MACHINE > SETTINGS > STORAGE > FLOPPY > REMOVE DISK FROM VIRTUAL DRIVE
+  b. English
+  c. Edition: Windows Server 2022 Standard (Desktop Experience)
+  d. Custom Install
+    - hit Nect
+  e. Wait for Install
+
+3. SETUP
+  a. Create admin credentials
+  b. Login
+  c. Let drivers update and finish
+    -Windows Settings > Windows Update
+
+4. Ensure connectivity between your ubuntu server and your Windows server by pinging.
+  a. In windows VM type ipconfig to get your IP
+  b. In ubuntu type ip a
+  c. From each side ping each others IP to ensure they can talk to each other.
