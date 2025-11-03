@@ -30,3 +30,76 @@ SETTING UP WINDOWS SERVER VM
   a. In windows VM type ipconfig to get your IP
   b. In ubuntu type ip a
   c. From each side ping each others IP to ensure they can talk to each other.
+
+INSTALL AD DOMAIN SERVICES ON THE WINDOWS SERVER
+1. Open windows server
+  a.Click "Add Roles and Features"
+  b.Select Role based of feature based installation
+  c.Check Active Directory Domain Services and hit "Next"
+
+2. After installation and a restart, click on the yellow flag in the server manager and check "Promote this server to a domain controller."
+  a. Add a new forest
+  b. Root domain name - lab.local
+  C. Set a Directory Services Restore Mode (DSRM) password
+  d. DNS Options → accept warnings
+  e. Leave defaults for NetBIOS (should be LAB)
+  f. Paths → default
+  g. Click "install" after pre-requisite check
+
+3. Verify Domain Controller Functionality
+  a. Start → Server Manager → Tools → Active Directory Users and Computers
+  b. In the left pane, expand your new domain lab.local
+    - Name it Admin or Users
+  c. Inside that OU:
+    - Right-click → New → User
+    - First name: Cloud
+    - Last name: Admin  
+    - User logon name: cloudadmin
+    - Click Next, set a strong password, and check:
+      x User cannot change password
+      x Password never expires
+    - Click Finish
+  d. Now, make this new user a Domain Admin:
+    - Right-click cloudadmin → Properties
+    - Go to Member Of tab → click Add
+    - Enter Domain Admins → OK
+    - You should now see Domain Admins in the group list.
+  e. Sign out and test your new account
+
+JOIN THE UBUNTU SERVER TO THE DOMAIN
+  1. Install AD Integration Packages
+    a. sudo apt update
+    b. sudo apt install realmd sssd sssd-tools libnss-sss libpam-sss adcli samba-common-bin oddjob oddjob-mkhomedir packagekit -y
+  2. Set DNS on Ubuntu to Use Your Windows Server
+    a. sudo nano /etc/systemd/resolved.conf
+    b. Find: #DNS= and change it to DNS="Your Domain IP"
+    c. Find: #Domains= and change it to: Domains=lab.local
+    d. Restart DNS resolver:
+      - sudo systemctl restart systemd-resolved
+    e. test: resolvectl status
+  3. Discover domain
+    a. realm discover lab.local
+  4. Join the Domain
+    a. sudo realm join lab.local -U 'cloudadmin'
+  5. Allow Domain Logins
+    a. sudo realm permit --all
+  6. Enable Home Directory Creation
+    a. sudo pam-auth-update
+    b. Use arrow keys to navigate, and space bar to select: Create home directory on login
+  7. Test Domain Login
+    a. ssh cloudadmin@lab.local 
+    or
+    b. su - cloudadmin@lab.local (Use this if you're already local)
+  8. Verify
+    a. id cloudadmin@lab.local
+
+
+
+
+
+
+
+
+
+
+    
